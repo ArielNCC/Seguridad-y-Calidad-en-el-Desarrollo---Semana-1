@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Veterinaria - Inicio</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
@@ -10,7 +10,7 @@
 <body>
 <h1 th:text="|Bienvenido a ${name}!|"></h1>
 <div sec:authorize="isAuthenticated()">
-    <h1 th:inline="text">Hola <span th:remove="tag" sec:authentication="name"></span>!</h1>
+    <h2 th:inline="text">Hola <span th:remove="tag" sec:authentication="name"></span>!</h2>
 </div>
 
 <div sec:authorize="!isAuthenticated()">
@@ -20,21 +20,17 @@
 </div>
 
 <div sec:authorize="isAuthenticated()">
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Cerrar sesión</button>
-    </form>
-</div>
-
-<div sec:authorize="isAuthenticated()">
-    <form th:action="@{/pacientes}" >
-        <button>Registrar pacientes</button>
-    </form>
-</div>
-
-<div sec:authorize="isAuthenticated()">
-    <form th:action="@{/citas}" >
-        <button>Registrar citas</button>
-    </form>
+    <div class="nav-buttons">
+        <form th:action="@{/pacientes}">
+            <button>Registrar pacientes</button>
+        </form>
+        <form th:action="@{/citas}">
+            <button>Registrar citas</button>
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </div>
 </div>
 
 </body>
