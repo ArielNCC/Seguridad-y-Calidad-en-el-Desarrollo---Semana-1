@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Pacientes</title>
+    <title>Veterinaria - Pacientes</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 
 <body>
@@ -10,26 +11,26 @@
 <h1>Registro de Pacientes</h1>
 
 <form th:action="@{/pacientes}" method="post">
-
     <label>Nombre:</label>
-    <input type="text" name="nombre" required><br>
+    <input type="text" name="nombre" required>
 
     <label>Especie:</label>
-    <input type="text" name="especie" required><br>
+    <input type="text" name="especie" required>
 
     <label>Raza:</label>
-    <input type="text" name="raza" required><br>
+    <input type="text" name="raza" required>
 
     <label>Edad:</label>
-    <input type="number" name="edad" required><br>
+    <input type="number" name="edad" required>
 
     <label>Dueño:</label>
-    <input type="text" name="dueno" required><br>
+    <input type="text" name="dueno" required>
 
     <button type="submit">Registrar Paciente</button>
 </form>
-<div>
-    <form th:action="@{/home}" >
+
+<div class="nav-buttons">
+    <form th:action="@{/home}">
         <button>Regresar</button>
     </form>
 </div>
@@ -44,7 +45,6 @@
         <th>Edad</th>
         <th>Dueño</th>
     </tr>
-
     <tr th:each="p : ${pacientes}">
         <td th:text="${p.nombre}"></td>
         <td th:text="${p.especie}"></td>
@@ -52,7 +52,6 @@
         <td th:text="${p.edad}"></td>
         <td th:text="${p.dueno}"></td>
     </tr>
-
 </table>
 
 </body>
