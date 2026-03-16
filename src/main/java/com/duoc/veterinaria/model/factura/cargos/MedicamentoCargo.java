@@ -1,4 +1,5 @@
 package com.duoc.veterinaria.model.factura.cargos;
+
 import com.duoc.veterinaria.model.factura.Factura;
 
 public class MedicamentoCargo extends CargoAdicional {
