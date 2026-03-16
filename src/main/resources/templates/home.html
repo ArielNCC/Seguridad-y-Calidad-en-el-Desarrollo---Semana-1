@@ -31,7 +31,7 @@
         <form th:action="@{/registros-medicos}" sec:authorize="hasAnyRole('VET','ADMIN')">
             <button>Registros Médicos</button>
         </form>
-        <form th:action="@{/facturas}" sec:authorize="hasAnyRole('VET','ADMIN')">
+        <form th:action="@{/facturas}" sec:authorize="hasRole('ADMIN')">
             <button>Facturas</button>
         </form>
         <form th:action="@{/logout}" method="post">

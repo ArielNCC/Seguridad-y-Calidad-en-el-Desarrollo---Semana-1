@@ -81,7 +81,7 @@ public class FacturaController {
                     model.addAttribute("factura", factura);
                     model.addAttribute("pacientes", pacienteService.obtenerPacientes());
                     model.addAttribute("veterinarios", obtenerVeterinariosDisponibles());
-                    return "DetalleFactura";
+                    return "detalle-factura";
                 })
                 .orElse("redirect:/facturas");
     }

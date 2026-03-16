@@ -39,7 +39,7 @@ public class RegistroMedicoController {
         model.addAttribute("registros", registroMedicoService.obtenerTodos());
         model.addAttribute("pacientes", pacienteService.obtenerPacientes());
         model.addAttribute("veterinarios", obtenerVeterinariosDisponibles());
-        return "registros";
+        return "registros-medicos";
     }
     
     @GetMapping("/nuevo")
@@ -110,7 +110,7 @@ public class RegistroMedicoController {
                     model.addAttribute("registro", registro);
                     model.addAttribute("pacientes", pacienteService.obtenerPacientes());
                     model.addAttribute("veterinarios", obtenerVeterinariosDisponibles());
-                    return "DetalleRegistro";
+                    return "detalle-registro-medico";
                 })
                 .orElse("redirect:/registros-medicos");
     }
