@@ -3,6 +3,7 @@ package com.duoc.veterinaria.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -20,8 +21,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home").permitAll()
-                        .requestMatchers("/**.css").permitAll()
+                        .requestMatchers("/", "/home", "/acceso-denegado").permitAll()
+                        .requestMatchers("/*.css").permitAll()
+                        .requestMatchers("/pacientes/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/citas").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/citas/**").hasAnyRole("USER", "VET", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -29,14 +33,16 @@ public class WebSecurityConfig {
                         .defaultSuccessUrl("/home", true)
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .logout((logout) -> logout.permitAll())
+                .exceptionHandling((exceptions) -> exceptions
+                        .accessDeniedPage("/acceso-denegado")
+                );
         return http.build();
     }
 
     @Bean
     @Description("In memory User details service registered since DB doesn't have user table ")
     public UserDetailsService users() {
-        // The builder will ensure the passwords are encoded before saving in memory
         UserDetails user = User.builder()
                 .username("user")
                 .password(passwordEncoder().encode("password"))
@@ -45,12 +51,12 @@ public class WebSecurityConfig {
         UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("password"))
-                .roles("USER", "ADMIN")
+                .roles("USER", "VET", "ADMIN")
                 .build();
         UserDetails vet = User.builder()
                 .username("vet")
                 .password(passwordEncoder().encode("password"))
-                .roles("USER")
+                .roles("VET")
                 .build();
         return new InMemoryUserDetailsManager(user, admin, vet);
     }

@@ -1,5 +1,7 @@
 package com.duoc.veterinaria.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,7 @@ public class CitaController {
     }
 
     @PostMapping("/citas")
-    public String guardarCita(Long pacienteId, String fecha, String hora, String motivoConsulta, String veterinarioAsignado) {
+    public String guardarCita(Long pacienteId, String fecha, String hora, String motivoConsulta, String veterinarioAsignado, Principal principal) {
         Paciente paciente = pacienteService.buscarPorId(pacienteId);
 
         Cita cita = new Cita();
@@ -42,6 +44,7 @@ public class CitaController {
         cita.setHora(hora);
         cita.setMotivoConsulta(motivoConsulta);
         cita.setVeterinarioAsignado(veterinarioAsignado);
+        cita.setUsuario(principal.getName());
 
         citaService.guardarCita(cita);
 

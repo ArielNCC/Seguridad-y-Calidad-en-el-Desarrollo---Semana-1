@@ -7,16 +7,18 @@ public class Cita {
     private String hora;
     private String motivoConsulta;
     private String veterinarioAsignado;
+    private String usuario;
 
     public Cita() {
     }
 
-    public Cita(Paciente paciente,String fecha, String hora, String motivoConsulta, String veterinarioAsignado) {
+    public Cita(Paciente paciente, String fecha, String hora, String motivoConsulta, String veterinarioAsignado, String usuario) {
         this.paciente = paciente;
         this.fecha = fecha;
         this.hora = hora;
         this.motivoConsulta = motivoConsulta;
         this.veterinarioAsignado = veterinarioAsignado;
+        this.usuario = usuario;
     }
 
     public Paciente getPaciente() {
@@ -57,5 +59,13 @@ public class Cita {
 
     public void setVeterinarioAsignado(String veterinarioAsignado) {
         this.veterinarioAsignado = veterinarioAsignado;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }
