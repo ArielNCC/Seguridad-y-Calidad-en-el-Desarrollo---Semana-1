@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Veterinaria - Inicio</title>
@@ -21,11 +22,11 @@
 
 <div sec:authorize="isAuthenticated()">
     <div class="nav-buttons">
-        <form th:action="@{/pacientes}">
+        <form th:action="@{/pacientes}" sec:authorize="hasAnyRole('USER','ADMIN')">
             <button>Registrar pacientes</button>
         </form>
         <form th:action="@{/citas}">
-            <button>Registrar citas</button>
+            <button>Ver citas</button>
         </form>
         <form th:action="@{/logout}" method="post">
             <button type="submit">Cerrar sesión</button>

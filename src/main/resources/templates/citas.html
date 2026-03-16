@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Veterinaria - Citas</title>
@@ -10,7 +11,7 @@
 
 <h1>Registro de Citas</h1>
 
-<form th:action="@{/citas}" method="post">
+<form th:action="@{/citas}" method="post" sec:authorize="hasAnyRole('USER','ADMIN')">
     <label>Paciente:</label>
     <select name="pacienteId" required>
         <option th:each="p : ${pacientes}"
@@ -53,6 +54,7 @@
         <th>Hora</th>
         <th>Motivo Consulta</th>
         <th>Veterinario Asignado</th>
+        <th>Registrado por</th>
     </tr>
     <tr th:each="c : ${citas}">
         <td th:text="${c.paciente.nombre}"></td>
@@ -60,6 +62,7 @@
         <td th:text="${c.hora}"></td>
         <td th:text="${c.motivoConsulta}"></td>
         <td th:text="${c.veterinarioAsignado}"></td>
+        <td th:text="${c.usuario}"></td>
     </tr>
 </table>
 

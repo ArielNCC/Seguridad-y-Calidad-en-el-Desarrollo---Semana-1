@@ -11,11 +11,16 @@ public class HomeController {
     public String home(@RequestParam(name="name", required=false, defaultValue="Veterinaria") String name, Model model) {
         model.addAttribute("name", name);
         return "home";
-    } 
+    }
 
     @GetMapping("/")
     public String root(@RequestParam(name="name", required=false, defaultValue="Veterinaria") String name, Model model) {
         model.addAttribute("name", name);
         return "home";
+    }
+
+    @GetMapping("/acceso-denegado")
+    public String accesoDenegado() {
+        return "acceso-denegado";
     }
 }
