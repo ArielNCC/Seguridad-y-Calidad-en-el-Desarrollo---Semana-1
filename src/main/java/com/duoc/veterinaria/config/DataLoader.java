@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.duoc.veterinaria.model.paciente.Paciente;
 import com.duoc.veterinaria.service.PacienteService;
-import com.duoc.veterinaria.model.Cita;
+import com.duoc.veterinaria.model.cita.Cita;
 import com.duoc.veterinaria.service.CitaService;
 
 /*

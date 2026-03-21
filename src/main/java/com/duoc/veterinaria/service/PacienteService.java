@@ -14,14 +14,14 @@ public class PacienteService {
     private PacienteRepository pacienteRepository;
 
     public List<Paciente> obtenerPacientes() {
-        return pacienteRepository.obtenerPacientes();
+        return pacienteRepository.findAll();
     }
 
     public void guardarPaciente(Paciente paciente) {
-        pacienteRepository.guardarPaciente(paciente);
+        pacienteRepository.save(paciente);
     }
 
     public Paciente buscarPorId(Long id) {
-        return pacienteRepository.buscarPorId(id);
+        return pacienteRepository.findById(id).orElse(null);
     }
 }

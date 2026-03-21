@@ -1,13 +1,24 @@
 package com.duoc.veterinaria.model.paciente;
 
+import com.duoc.veterinaria.model.cita.Cita;
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "paciente")
 public class Paciente {
     //Los usuarios deben poder registrar nuevos pacientes, incluyendo su nombre, especie, raza, edad y dueño. Esta información se debe almacenar en memoria, siguiendo un esquema similar a los usuarios
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String especie;
     private String raza;
     private int edad;
     private String dueno;
+    @OneToMany(mappedBy = "paciente")
+    private List<Cita> citas;
 
     public Paciente() {
     }
@@ -19,6 +30,16 @@ public class Paciente {
         this.raza = raza;
         this.edad = edad;
         this.dueno = dueno;
+    }
+
+    public Paciente(Long id, String nombre, String especie, String raza, int edad, String dueno, List<Cita> citas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
+        this.dueno = dueno;
+        this.citas = citas;
     }
 
     public Long getId() {
@@ -67,6 +88,14 @@ public class Paciente {
 
     public void setDueno(String dueno) {
         this.dueno = dueno;
+    }
+
+    public List<Cita> getCitas() {
+        return citas;
+    }
+
+    public void setCitas(List<Cita> citas) {
+        this.citas = citas;
     }
 
 }

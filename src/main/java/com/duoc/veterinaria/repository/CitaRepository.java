@@ -3,21 +3,12 @@ package com.duoc.veterinaria.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.duoc.veterinaria.model.cita.Cita;
 
 @Repository
-public class CitaRepository {
-    private List<Cita> citas = new ArrayList<>();
-    private Long contadorId = 1L;
+public interface CitaRepository extends JpaRepository<Cita, Long> {
 
-    public List<Cita> obtenerCitas() {
-        return citas;
-    }
-
-    public void guardarCita(Cita cita) {
-        cita.setId(contadorId++);
-        citas.add(cita);
-    }
 }

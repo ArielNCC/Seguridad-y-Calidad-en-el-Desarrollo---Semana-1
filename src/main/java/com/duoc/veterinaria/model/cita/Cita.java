@@ -1,14 +1,22 @@
 package com.duoc.veterinaria.model.cita;
 
 import com.duoc.veterinaria.model.paciente.Paciente;
+import jakarta.persistence.*;
 
+@Entity
 public class Cita {
     //El sistema debe permitir programar citas para los pacientes, incluyendo la fecha, hora, motivo de la consulta y veterinario asignado. Esta información se debe almacenar en memoria, siguiendo un esquema similar a los usuarios.
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fecha;
     private String hora;
+    @Column(name = "motivo_consulta")
     private String motivoConsulta;
+    @Column(name = "veterinario_asignado")
     private String veterinarioAsignado;
     private String usuario;
 

@@ -14,25 +14,18 @@ public class CitaService {
     private CitaRepository citaRepository;
 
     public List<Cita> obtenerCitas() {
-        return citaRepository.obtenerCitas();
+        return citaRepository.findAll();
     }
 
     public void guardarCita(Cita cita) {
-        citaRepository.guardarCita(cita);
+        citaRepository.save(cita);
     }
 
     public Cita buscarPorId(Long id) {
-        List<Cita> citas = citaRepository.obtenerCitas();
-        for (Cita c : citas) {
-            if (c.getId().equals(id)) {
-                return c;
-            }
-        }
-        return null;
+        return citaRepository.findById(id).orElse(null);
     }
 
     public void eliminarCita(Long id) {
-        List<Cita> citas = citaRepository.obtenerCitas();
-        citas.removeIf(c -> c.getId().equals(id));
+        citaRepository.deleteById(id);
     }
 }
