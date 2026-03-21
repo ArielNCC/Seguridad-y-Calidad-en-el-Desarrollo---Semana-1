@@ -1,9 +1,3 @@
--- Seed data: usuarios (password = 'password' para todos, BCrypt hash)
-INSERT IGNORE INTO usuarios (username, password_hash, role, active) VALUES
-('user',  '$2a$10$dXJ3SW6G7P50lGmMQgel6uVKnuB53OGVG2dFGWzHNWj/dSMhB7JHm', 'USER',  true),
-('vet',   '$2a$10$dXJ3SW6G7P50lGmMQgel6uVKnuB53OGVG2dFGWzHNWj/dSMhB7JHm', 'VET',   true),
-('admin', '$2a$10$dXJ3SW6G7P50lGmMQgel6uVKnuB53OGVG2dFGWzHNWj/dSMhB7JHm', 'ADMIN', true);
-
 -- Seed data: pacientes
 INSERT IGNORE INTO paciente (id, nombre, especie, raza, edad, dueno) VALUES
 (1, 'Firulais', 'Perro', 'Labrador',       5, 'Juan Perez'),
