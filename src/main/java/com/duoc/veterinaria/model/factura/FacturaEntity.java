@@ -61,6 +61,7 @@ public class FacturaEntity implements Factura {
             };
         }
         return factura;
+    }
       
     public double getTotal() {
         return total;
