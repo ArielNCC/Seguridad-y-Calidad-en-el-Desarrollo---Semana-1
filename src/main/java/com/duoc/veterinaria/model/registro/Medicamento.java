@@ -1,7 +1,11 @@
 package com.duoc.veterinaria.model.registro;
 
-public class Medicamento {
+import jakarta.persistence.*;
 
+@Entity
+public class Medicamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String nombre;
@@ -13,6 +17,10 @@ public class Medicamento {
     private String viaAdministracion;
     
     private int duracionDias;
+
+    @ManyToOne
+    @JoinColumn(name = "registro_id")
+    private RegistroMedico registroMedico;
 
     public Medicamento() {
     }
@@ -71,5 +79,13 @@ public class Medicamento {
 
     public void setDuracionDias(int duracionDias) {
         this.duracionDias = duracionDias;
+    }
+
+    public RegistroMedico getRegistroMedico() {
+        return registroMedico;
+    }
+
+    public void setRegistroMedico(RegistroMedico registroMedico) {
+        this.registroMedico = registroMedico;
     }
 }

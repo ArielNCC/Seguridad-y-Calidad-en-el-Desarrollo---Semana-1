@@ -5,19 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.duoc.veterinaria.model.paciente.Paciente;
+import jakarta.persistence.*;
 
+@Entity
 public class RegistroMedico {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
+    @OneToMany(mappedBy = "registroMedico", cascade = CascadeType.ALL)
     private List<Diagnostico> diagnosticos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "registroMedico", cascade = CascadeType.ALL)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "registroMedico", cascade = CascadeType.ALL)
     private List<Medicamento> medicamentos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "registroMedico", cascade = CascadeType.ALL)
     private List<NotaMedica> notas = new ArrayList<>();
     
     private LocalDateTime fechaRegistro;
@@ -58,6 +67,7 @@ public class RegistroMedico {
     }
 
     public void agregarDiagnostico(Diagnostico diagnostico) {
+        diagnostico.setRegistroMedico(this);
         this.diagnosticos.add(diagnostico);
     }
 
@@ -70,6 +80,7 @@ public class RegistroMedico {
     }
 
     public void agregarTratamiento(Tratamiento tratamiento) {
+        tratamiento.setRegistroMedico(this);
         this.tratamientos.add(tratamiento);
     }
 
@@ -82,6 +93,7 @@ public class RegistroMedico {
     }
 
     public void agregarMedicamento(Medicamento medicamento) {
+        medicamento.setRegistroMedico(this);
         this.medicamentos.add(medicamento);
     }
 
@@ -94,6 +106,7 @@ public class RegistroMedico {
     }
 
     public void agregarNota(NotaMedica nota) {
+        nota.setRegistroMedico(this);
         this.notas.add(nota);
     }
 

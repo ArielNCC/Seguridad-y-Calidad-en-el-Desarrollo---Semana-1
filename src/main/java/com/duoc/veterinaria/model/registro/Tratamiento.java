@@ -1,9 +1,13 @@
 package com.duoc.veterinaria.model.registro;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
 public class Tratamiento {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String nombre;
@@ -15,6 +19,10 @@ public class Tratamiento {
     private LocalDate fechaFin;
     
     private String instrucciones;
+
+    @ManyToOne
+    @JoinColumn(name = "registro_id")
+    private RegistroMedico registroMedico;
 
     public Tratamiento() {
     }
@@ -73,5 +81,13 @@ public class Tratamiento {
 
     public void setInstrucciones(String instrucciones) {
         this.instrucciones = instrucciones;
+    }
+
+    public RegistroMedico getRegistroMedico() {
+        return registroMedico;
+    }
+
+    public void setRegistroMedico(RegistroMedico registroMedico) {
+        this.registroMedico = registroMedico;
     }
 }
