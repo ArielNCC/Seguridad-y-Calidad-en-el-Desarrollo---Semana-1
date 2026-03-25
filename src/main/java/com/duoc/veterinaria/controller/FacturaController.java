@@ -46,7 +46,7 @@ public class FacturaController {
         return "factura/index";
     }
     
-    @GetMapping("/nueva")
+    @GetMapping({"/nueva", "/nuevo"})
     public String mostrarFormularioNueva() {
         return "factura/nuevo";
     }
