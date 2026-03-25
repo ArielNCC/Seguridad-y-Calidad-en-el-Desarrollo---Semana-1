@@ -329,9 +329,9 @@ depends_on:
 
 ---
 
-## 6. Correr el Local
+## 5. Correr el Local
 
-### 6.1 Crear la base de datos
-### 6.2 Cargar variables de .env
-### 6.3 Correr con mvn
+### 5.1 Crear la base de datos
+### 5.2 Cargar variables de .env
+### 5.3 Correr con mvn
 **Comando simplificado** set -a && source .env && export DB_HOST=127.0.0.1 && ./mvnw spring-boot:run
