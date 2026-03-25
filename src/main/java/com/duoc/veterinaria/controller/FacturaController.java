@@ -16,6 +16,7 @@ import com.duoc.veterinaria.model.factura.FacturaEntity;
 import com.duoc.veterinaria.model.paciente.Paciente;
 import com.duoc.veterinaria.service.FacturaService;
 import com.duoc.veterinaria.service.PacienteService;
+import com.duoc.veterinaria.service.UsuarioService;
 
 @Controller
 @RequestMapping("/factura")
@@ -27,8 +28,14 @@ public class FacturaController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     private List<String> obtenerVeterinariosDisponibles() {
-        return List.of("Veterinario 1", "Veterinario 2", "Veterinario 3");
+        return usuarioService.obtenerVeterinarios()
+                .stream()
+                .map(veterinario -> veterinario.getUsername())
+                .toList();
     }
     
     @GetMapping

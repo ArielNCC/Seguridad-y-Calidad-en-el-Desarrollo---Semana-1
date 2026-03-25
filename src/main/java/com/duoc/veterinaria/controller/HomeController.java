@@ -39,4 +39,13 @@ public class HomeController {
     public String accesoDenegado() {
         return "acceso-denegado";
     }
+
+    /**
+     * Panel principal del sistema
+     * Ruta: /panel -> templates/home/panel.html
+     */
+    @GetMapping("/panel")
+    public String panel() {
+        return "home/panel";
+    }
 }

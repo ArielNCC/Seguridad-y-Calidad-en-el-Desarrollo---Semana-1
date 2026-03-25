@@ -19,6 +19,7 @@ import com.duoc.veterinaria.model.registro.RegistroMedico;
 import com.duoc.veterinaria.model.registro.Tratamiento;
 import com.duoc.veterinaria.service.PacienteService;
 import com.duoc.veterinaria.service.RegistroMedicoService;
+import com.duoc.veterinaria.service.UsuarioService;
 
 @Controller
 @RequestMapping("/registro-medico")
@@ -30,8 +31,14 @@ public class RegistroMedicoController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     private List<String> obtenerVeterinariosDisponibles() {
-        return List.of("Veterinario 1", "Veterinario 2", "Veterinario 3");
+        return usuarioService.obtenerVeterinarios()
+                .stream()
+                .map(veterinario -> veterinario.getUsername())
+                .toList();
     }
     
     @GetMapping

@@ -45,7 +45,9 @@
             <input type="text" id="motivo" required>
 
             <label>Veterinario Asignado:</label>
-            <input type="text" id="veterinario" required>
+            <select id="veterinario" required>
+                <option value="">Cargando veterinarios...</option>
+            </select>
 
             <br><br>
             <button type="submit">Crear Cita</button>
@@ -56,9 +58,11 @@
     <script>
         // Verificar autenticación
         requireAuth();
+        const userData = getUserData();
 
         // Cargar pacientes al iniciar
         cargarPacientes();
+        cargarVeterinarios();
 
         async function cargarPacientes() {
             const select = document.getElementById('paciente-id');
@@ -84,6 +88,36 @@
                 });
             } catch (err) {
                 select.innerHTML = '<option value="">Error al cargar pacientes</option>';
+            }
+        }
+
+        async function cargarVeterinarios() {
+            const select = document.getElementById('veterinario');
+            try {
+                const response = await fetch('/api/veterinarios', {
+                    headers: authHeaders()
+                });
+
+                if (!response.ok) {
+                    if (handleAuthError(response)) return;
+                    throw new Error('Error al cargar veterinarios');
+                }
+
+                const veterinarios = await response.json();
+                select.innerHTML = '<option value="">Selecciona un veterinario</option>';
+
+                veterinarios.forEach(veterinario => {
+                    const option = document.createElement('option');
+                    option.value = veterinario.username;
+                    option.textContent = veterinario.username;
+                    select.appendChild(option);
+                });
+
+                if (userData) {
+                    select.value = userData.username;
+                }
+            } catch (err) {
+                select.innerHTML = '<option value="">Error al cargar veterinarios</option>';
             }
         }
 

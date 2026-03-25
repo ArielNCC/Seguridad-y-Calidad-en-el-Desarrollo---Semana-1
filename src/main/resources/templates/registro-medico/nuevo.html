@@ -55,7 +55,9 @@
                 <input type="date" id="fecha" required>
 
                 <label>Veterinario:</label>
-                <input type="text" id="veterinario" required>
+                <select id="veterinario" required>
+                    <option value="">Cargando veterinarios...</option>
+                </select>
             </div>
 
             <div class="form-section">
@@ -96,14 +98,46 @@
             window.location.href = '/acceso-denegado';
         }
 
-        // Cargar pacientes y establecer fecha actual
+        const userData = getUserData();
+
+        // Cargar pacientes y especialistas
         cargarPacientes();
+        cargarVeterinarios();
         document.getElementById('fecha').valueAsDate = new Date();
 
         // Establecer nombre del veterinario actual
-        const userData = getUserData();
         if (userData) {
             document.getElementById('veterinario').value = userData.username;
+        }
+
+        async function cargarVeterinarios() {
+            const select = document.getElementById('veterinario');
+            try {
+                const response = await fetch('/api/veterinarios', {
+                    headers: authHeaders()
+                });
+
+                if (!response.ok) {
+                    if (handleAuthError(response)) return;
+                    throw new Error('Error al cargar veterinarios');
+                }
+
+                const veterinarios = await response.json();
+                select.innerHTML = '<option value="">Selecciona un veterinario</option>';
+
+                veterinarios.forEach(veterinario => {
+                    const option = document.createElement('option');
+                    option.value = veterinario.username;
+                    option.textContent = veterinario.username;
+                    select.appendChild(option);
+                });
+
+                if (userData) {
+                    select.value = userData.username;
+                }
+            } catch (err) {
+                select.innerHTML = '<option value="">Error al cargar veterinarios</option>';
+            }
         }
 
         async function cargarPacientes() {

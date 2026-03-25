@@ -64,6 +64,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/citas/**").hasAnyRole("USER", "VET", "ADMIN")
                         .requestMatchers("/api/registros-medicos/**").hasAnyRole("VET", "ADMIN")
                         .requestMatchers("/api/facturas/**").hasRole("ADMIN")
+                        .requestMatchers("/api/veterinarios/**").hasAnyRole("USER", "VET", "ADMIN")
 
                         // Cualquier otra ruta API requiere autenticación
                         .anyRequest().authenticated()
